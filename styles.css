@@ -1,0 +1,210 @@
+*{
+    margin: 0;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    max-width: 1200px;
+    margin: auto;
+    background-image: linear-gradient(to bottom, #d5a34d, #00c0c7 30%);
+}
+
+.header{
+    background-image: url(images/fondo.jpg);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    min-height: 31.25em;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100vh;
+
+    position: relative;
+}
+
+.nav{
+    display: grid;
+    grid-template-columns: repeat(2,max-content);
+    justify-content: space-between;
+    padding: 0.9rem;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    z-index: 100;
+}
+.nav__ul{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1.7em;
+    align-content: center;
+    max-height: 100vh;
+
+}
+.nav__li{
+    list-style: none;
+    font-weight: 300;
+    
+    padding-left: 1em;
+    font-size: 1.25em;
+}
+.nav a{
+    color: rgba(255, 255, 255, 0.683);
+    text-decoration: none;
+    font-size: 1.3em;
+
+    transition: color .3s;
+}
+.nav a:hover{
+    color: #fff;
+}
+.nav__icon{
+    display: none;
+}
+.logo{
+    font-size: 1.8em;
+    padding: 0;
+    z-index: 150;
+}
+.nav__icon i{
+    color: #fff;
+}
+
+/* -----paragraphs----- */
+
+.paragraph{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+
+    width: 100%;
+    height: calc(50vh - 31.4px);
+    position: relative;
+}
+.paragraph1 p, .paragraph2 p{
+    background-color: #f8ce819d;
+    color: rgb(49, 49, 49);
+    font-size: clamp(0.9em, 1.3em, 2em);
+    padding: 1em;
+}
+.paragraph1 p{
+    grid-column: -2 / -1;
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+    body{
+        overflow-x: hidden;
+    }
+    .nav{
+        --state-menu: scale(1);
+        --state-close: scale(0);
+        --state-open-close: translate(100%);
+
+        display: grid;
+        grid-template-columns: repeat(2,max-content);
+        justify-content: space-between;
+        align-items: center;
+        
+        padding: 15px;
+        overflow-y: hidden;
+
+        transition: background .3s;
+    }
+    .nav:target{
+        --state-menu: scale(0);
+        --state-close: scale(1);
+        --state-open-close: translate(0);
+        background-color: #000;
+        z-index: 100;
+
+        overflow-y:hidden;
+    }
+    .nav__ul{
+        display: grid;
+        position: absolute;
+        grid-auto-flow: unset;
+        display: grid;
+        align-items: center;
+        gap: 2em;
+
+        background-color:rgb(0, 0, 0);
+
+        height: 100vh;
+        width: 100%;
+        padding: 0;
+        top: 0;
+        left: 0;
+        z-index: 100;
+
+        transform: var(--state-open-close);
+        transition: transform .3s;
+    }
+    .nav__li{
+        padding-left: 1em;
+        font-size: 1.25em;
+    }
+    .nav__icon{
+        display: block;
+    }
+    .nav__icon i{
+        font-size: 32px;
+    }
+    .menu, .close{
+        cursor: pointer;
+        grid-column: -2 / -1;
+        grid-row: 1 / 2;
+        transition: transform .3s;
+        z-index: 100;
+    }
+    .menu{
+        transform: var(--state-menu);
+    }
+    .close{
+        transform: var(--state-close);
+    }
+}
+
+@media (max-width: 600px), (max-height: 445px) {
+    .paragraph{
+        grid-template-columns: 1fr;
+    }
+    .paragraph1 p{
+        grid-column: unset;
+    }
+    .paragraph1 p, .paragraph2 p{
+        font-size: clamp(.9em, 1em, 2em);
+        padding: .8em;
+    }
+}
+
+@media (max-width: 220px), (max-height: 400px) {
+    .nav__ul{
+        display: grid;
+        position: absolute;
+        grid-auto-flow: unset;
+        display: grid;
+        align-items: center;
+        gap: 1em;
+
+        background-color:rgb(0, 0, 0);
+
+        height: 100vh;
+        width: 100%;
+        padding: 0;
+        top: 0;
+        left: 0;
+        z-index: 0;
+
+        transform: var(--state-open-close);
+        transition: transform .3s;
+    }
+    .nav__icon i{
+        font-size: 1.5em;
+    }
+    .nav a{
+        font-size: .7em;
+    }
+    .logo{
+        font-size: 1.2em;
+    }
+}
